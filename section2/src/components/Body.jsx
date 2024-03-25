@@ -27,7 +27,7 @@ export default function Body() {
     <Lightbulb light={light}/>
     <StaticLightbulb />
     <button onClick={()=> {
-        setLight("ON");
+        setLight("ONN");
     }}
     >켜기
     </button>
