@@ -2,33 +2,34 @@ import './Body.css';
 import { useState } from 'react';
 
 export default function Body() {
-    const [name, setName] = useState('');
-    const [gender, setGender] = useState('');
-    const [bio, setBio] = useState('');
+    const [state, setState] = useState({
+        name: '',
+        gender: '',
+        bio: '',
+    });
 
-    const onChangeName = (e) => {
-        setName(e.target.value);
+    const onChange = (e) => {
+        console.log(e.target.name + ' : ' + e.target.value);
+        setState({
+            ...state,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    const onChangeGender = (e) => {
-        setGender(e.target.value);
-    };
-
-    const onChangeBio = (e) => {
-        setBio(e.target.value);
-    };
     return (
         <div className="body">
             <div>
                 <input
-                    value={name}
-                    onChange={onChangeName}
+                    name={'name'}
+                    value={state.name}
+                    onChange={onChange}
                 />
             </div>
             <div>
                 <select
-                    value={gender}
-                    onChange={onChangeGender}
+                    name={'gender'}
+                    value={state.gender}
+                    onChange={onChange}
                 >
                     <option value="">밝히지 않음</option>
                     <option value="female">여성</option>
@@ -37,8 +38,9 @@ export default function Body() {
             </div>
             <div>
                 <textarea
-                    value={bio}
-                    onChange={onChangeBio}
+                    name={'bio'}
+                    value={state.bio}
+                    onChange={onChange}
                 />
             </div>
         </div>
