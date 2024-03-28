@@ -1,44 +1,46 @@
 import './Body.css';
 import { useState } from 'react';
 
-function Lightbulb({ light }) {
-    return (
-        <>
-            {light === 'ON' ? (
-                <div style={{ backgroundColor: 'orange' }}>ON</div>
-            ) : (
-                <div style={{ backgroundColor: 'gray' }}>OFF</div>
-            )}
-        </>
-    );
-}
-
-function StaticLightbulb() {
-    console.log('dd');
-    return <div style={{ backgroundColor: 'gray' }}>OFF</div>;
-}
-
 export default function Body() {
-    const [light, setLight] = useState('OFF');
+    const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
+    const [bio, setBio] = useState('');
 
+    const onChangeName = (e) => {
+        setName(e.target.value);
+    };
+
+    const onChangeGender = (e) => {
+        setGender(e.target.value);
+    };
+
+    const onChangeBio = (e) => {
+        setBio(e.target.value);
+    };
     return (
         <div className="body">
-            <Lightbulb light={light} />
-            <StaticLightbulb />
-            <button
-                onClick={() => {
-                    setLight('ONN');
-                }}
-            >
-                켜기
-            </button>
-            <button
-                onClick={() => {
-                    setLight('OFF');
-                }}
-            >
-                끄기
-            </button>
+            <div>
+                <input
+                    value={name}
+                    onChange={onChangeName}
+                />
+            </div>
+            <div>
+                <select
+                    value={gender}
+                    onChange={onChangeGender}
+                >
+                    <option value="">밝히지 않음</option>
+                    <option value="female">여성</option>
+                    <option value="male">남성</option>
+                </select>
+            </div>
+            <div>
+                <textarea
+                    value={bio}
+                    onChange={onChangeBio}
+                />
+            </div>
         </div>
     );
 }
