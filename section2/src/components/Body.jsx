@@ -1,5 +1,5 @@
 import './Body.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Body() {
     const [state, setState] = useState({
@@ -8,18 +8,28 @@ export default function Body() {
         bio: '',
     });
 
+    const nameRef = useRef();
+
     const onChange = (e) => {
-        console.log(e.target.name + ' : ' + e.target.value);
         setState({
             ...state,
             [e.target.name]: e.target.value,
         });
     };
 
+    const onSubmit = () => {
+        if (state.name === '') {
+            nameRef.current.focus();
+            return;
+        }
+        alert(`${state.name}님 회원가입을 축하드립니다!`);
+    };
+
     return (
         <div className="body">
             <div>
                 <input
+                    ref={nameRef}
                     name={'name'}
                     value={state.name}
                     onChange={onChange}
@@ -42,6 +52,9 @@ export default function Body() {
                     value={state.bio}
                     onChange={onChange}
                 />
+            </div>
+            <div>
+                <button onClick={onSubmit}>회원가입</button>
             </div>
         </div>
     );
