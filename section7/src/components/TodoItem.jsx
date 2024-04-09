@@ -1,12 +1,12 @@
 import './TodoItem.css';
 
-export default function TodoItem() {
-    return (
-        <div className="TodoItem">
-            <input type="checkbox" />
-            <div className="content">todo</div>
-            <div className="date">작성일</div>
-            <button>삭제</button>
-        </div>
-    );
+export default function TodoItem({ id, isDone, createDate, content }) {
+  return (
+    <div className="TodoItem">
+      <input type="checkbox" checked={isDone} />
+      <div className="content">{content}</div>
+      <div className="date">{new Date(createDate).toLocaleDateString()}</div>
+      <button>삭제</button>
+    </div>
+  );
 }
