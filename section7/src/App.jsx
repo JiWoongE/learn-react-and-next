@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
 import Header from './components/Header';
 import TodoEditor from './components/TodoEditor';
@@ -9,19 +9,19 @@ const mockData = [
     id: 0,
     isDone: true,
     content: 'React 공부하기',
-    createDate: new Date().getTime(),
+    createdDate: new Date().getTime(),
   },
   {
     id: 1,
     isDone: false,
     content: '빨래 널기',
-    createDate: new Date().getTime(),
+    createdDate: new Date().getTime(),
   },
   {
     id: 2,
     isDone: true,
     content: '음악 연습하기',
-    createDate: new Date().getTime(),
+    createdDate: new Date().getTime(),
   },
 ];
 
@@ -34,21 +34,24 @@ function App() {
       id: idRef.current++,
       isDone: false,
       content,
-      createDate: new Date().getTime(),
+      createdDate: new Date().getTime(),
     };
-
-    setTodos([newTodo, ...todos]);
+    setTodos([...todos, newTodo]);
   };
 
   const onUpdate = (targetId) => {
     setTodos(todos.map((todo) => (todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo)));
   };
 
+  const onDelete = (targetId) => {
+    setTodos(todos.filter((todo) => todo.id !== targetId));
+  };
+
   return (
     <div className="App">
       <Header />
       <TodoEditor onCreate={onCreate} />
-      <TodoList todos={todos} onUpdate={onUpdate} />
+      <TodoList todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   );
 }
